@@ -1,0 +1,60 @@
+h1 {
+    font-family: 'Montserrat', sans-serif;
+	position: relative;
+	/* top: 7.37vh; 72px; */
+	text-align: center;
+	/* font-size: 5.73vh; 56px; */
+	/* letter-spacing: 0.12vw; 2px; */
+	/* font-weight: 700; */
+}
+
+h2 {
+    /* padding-top: 8px; */
+    font-weight: 500;
+    font-size: 1.4rem;
+	margin: 3% 5%;
+}
+  
+p {
+    /* padding-top: 8px; */
+    font-weight: 500;
+    /* font-size: 1.4rem; */
+    margin: 3% 5%;
+	/* padding: 3%; */
+	border: 20%;
+}
+  
+body {
+	font-family: Arial, sans-serif;
+	margin: 20px;
+}
+.image-row {
+	display: flex;
+	justify-content: space-between;
+}
+.image-row img {
+	width: 30%; 
+	height: auto;
+}
+
+.two-image-row {
+	display: flex;
+	justify-content: space-between; 
+}
+.two-image-row img {
+	width: 48%; 
+	height: auto;
+}
+
+.one-image-row {
+    padding: 5%;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    height: 100vh; 
+}
+
+.one-image-row img {
+    width: 60%;
+    height: auto;
+}
