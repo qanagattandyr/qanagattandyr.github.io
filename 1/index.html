@@ -39,38 +39,77 @@
         does the approximately 400x400 rescaled picture. It then gets cropped in align. Then every level starts
         from shifting the source into the best shift suggested from the previous level.
     </p> 
-    <p>Below are the pictures I got from simple implementation</p>
+    <h2>Below are the pictures I got from simple implementation</h2>
     <div class="image-row">
 
         <img src="./media/cathedral.jpg">
         <img src="./media/monastery.jpg">
         <img src="./media/tobolsk.jpg">
     </div>
-    <p></p>
-    <p>Below are the pictures I got from pyramid implementation</p>
+    <!-- <p>here are the alignments:</p> -->
+    <div class="text-container">
+        <div>cathredral: Green channel aligned with shift: (5, 2), Red channel aligned with shift: (12, 3)</div>
+        <div>monastery: Green channel aligned with shift: (-3, 2), Red channel aligned with shift: (3, 2)</div>
+        <div>tobolsk: Green channel aligned with shift: (3, 3), Red channel aligned with shift: (6, 3)</div>
+    </div>
+
+    <h2>Below are the pictures I got from pyramid implementation</h2>
     <div class="two-image-row">
-        <img src="./media/church.tif">
-        <img src="./media/harvesters.tif">
+        <div class="image-with-caption">
+            <img src="./media/church.tif">
+            <p>Church: Green: (25, 4), Red: (58, -4)</p>
+        </div>
+        <div class="image-with-caption">
+            <img src="./media/harvesters.tif">
+            <p>Harvesters: Green: (60, 17), Red: (124, 14)</p>
+        </div>
     </div>
     <div class="two-image-row">
+        <div class="image-with-caption">
         <img src="./media/icon.tif">
+        <p>Icon: Green: (41, 17), Red: (89, 23)</p>
+        </div>
+        <div class="image-with-caption">
         <img src="./media/lady.tif">
+        <p>Lady: Green: (55, 9), Red: (117, 12)</p>
+        </div>  
     </div>
     <div class="two-image-row">
+        <div class="image-with-caption">
         <img src="./media/melons.tif">
+        <p>Melons: Green: (81, 10), Red: (178, 13)</p>
+        </div>
+        <div class="image-with-caption">
         <img src="./media/onion_church.tif">
+        <p>Onion church: Green: (51, 27), Red: (108, 36)</p>
+        </div>  
     </div>
     <div class="two-image-row">
+        <div class="image-with-caption">
         <img src="./media/sculpture.tif">
+        <p>sculpture: Green: (33, -11), Red: (140, -27)</p>
+        </div>
+        <div class="image-with-caption">
         <img src="./media/self_portrait.tif">
+        <p>Self portrait: Green: (79, 29), Red: (176, 37)</p>
+        </div>
     </div>
     <div class="one-image-row">
+        <div class="image-with-caption">
         <img src="./media/train.tif">
+        <p>Train: Green: (43, 6), Red: (87, 32)</p>
+        </div>
     </div>
-    <p>Below are two pictures that went slightly wrong for some reason.</p>
+    <h2>Below are two pictures that went slightly wrong for some reason.</h2>
     <div class="two-image-row">
+        <div class="image-with-caption">
         <img src="./media/three_generations.tif">
+    <p>Three generations: Green: (53, 14), Red: (111, 11)</p>
+        </div>
+        <div class="image-with-caption">
         <img src="./media/emir.tif">
+    <p>Emir: Green: (49, 24), Red: (103, 57)</p>
+        </div>
     </div>
 </body>
 </html>
