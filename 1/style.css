@@ -118,6 +118,7 @@ h1, h2, p {
 .image-with-caption img {
     width: 100%;
     height: auto;
+    max-width: 300px; /* Optionally, set a max width to prevent very large images */
 }
 
 .image-with-caption p {
@@ -125,3 +126,10 @@ h1, h2, p {
     font-size: 14px; /* Adjust the font size if needed */
     color: #333; /* Change the text color if necessary */
 }
+
+img {
+    width: 80%; /* Set this to a percentage to downscale the image */
+    height: auto; /* This maintains the aspect ratio */
+    max-width: 300px; /* Optionally, set a max width to prevent very large images */
+}
+
