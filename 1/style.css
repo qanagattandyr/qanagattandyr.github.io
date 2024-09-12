@@ -21,7 +21,7 @@ p {
     /* font-size: 1.4rem; */
     margin: 3% 5%;
 	/* padding: 3%; */
-	border: 20%;
+	border: 10%;
 }
   
 body {
@@ -29,6 +29,7 @@ body {
 	margin: 20px;
 }
 .image-row {
+    padding: 5%;
 	display: flex;
 	justify-content: space-between;
 }
@@ -38,6 +39,7 @@ body {
 }
 
 .two-image-row {
+    padding: 5%;
 	display: flex;
 	justify-content: space-between; 
 }
@@ -47,14 +49,14 @@ body {
 }
 
 .one-image-row {
-    padding: 5%;
+    padding: 3%;
     display: flex;
     justify-content: center; 
     align-items: center; 
-    height: 100vh; 
+    /* height: 100vh;  */
 }
 
 .one-image-row img {
-    width: 60%;
+    width: 50%;
     height: auto;
 }

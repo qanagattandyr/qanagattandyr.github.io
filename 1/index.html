@@ -6,19 +6,38 @@
 </head>
 <body>
     <h1>the first project of intro to computer vision course</h1>
+    <h2>Introduction</h2>
+    <p>
+        Sergei Mikhailovich Prokudin-Gorskii (1863-1944) was a man well ahead of his time. Convinced, as early as 1907, 
+        that color photography was the wave of the future, he won Tzar's special permission to travel across the vast 
+        Russian Empire and take color photographs of everything he saw including the only color portrait of Leo Tolstoy. 
+        And he really photographed everything: people, buildings, landscapes, railroads, bridges... thousands of color 
+        pictures! His idea was simple: record three exposures of every scene onto a glass plate using a red, a green, 
+        and a blue filter. His RGB glass plate negatives, capturing the last years of the Russian Empire, survived and were 
+        purchased in 1948 by the Library of Congress. The LoC has recently digitized the negatives and made them available on-line. 
+        This project takes those negative and tries to make a colored picture using single-scale and recursive algorithms to align all 
+        three images from LoC collection.  
+    </p>
+    <p>
+        Here is the example of initial image:
+    </p>
+    <div class="one-image-row">
+        <img src="./media/melons_start.tif">
+    </div>
     <h2>my approach:</h2>
-    <p>For the simple implementation I initially tried to align images without cropping them.
-    It kept being slightly wrong, which, I believe, is because of the black borders. So I ended up implementing
-    crop_borders function and adding it straight to the align function. To check the  
-    closeness between images I used normalized cross-corellation. It is in a separate function called normalized_cross_correlation
-    My align crops small part of the blue image that we are trying to align to. It then loops through the 
-    x and y coordinates, rolling the source image(red/green image) pixels(represented as floats). 
-    Meaning I initially roll the float, and then crop it, making it look like I am moving the cropped porion.
-    In fact I roll pixels(rm the last pixels on height and width and then add them at the front). That is also 
-    on of the reasons why not cropping did not work in my case. For the pyramid implementation I used the same align function,
-    creating the function called align_pyramid. It is recursive, and starts from the bottom. Level 1
-    does the approximately 400x400 rescaled picture. It then gets cropped in align. Then every level starts
-    from shifting the source into the best shift suggested from the previous level.
+    <p>
+        For the simple implementation I initially tried to align images without cropping them.
+        It kept being slightly wrong, which, I believe, is because of the black borders. So I ended up implementing
+        crop_borders function and adding it straight to the align function. To check the  
+        closeness between images I used normalized cross-corellation. It is in a separate function called normalized_cross_correlation
+        My align crops small part of the blue image that we are trying to align to. It then loops through the 
+        x and y coordinates, rolling the source image(red/green image) pixels(represented as floats). 
+        Meaning I initially roll the float, and then crop it, making it look like I am moving the cropped porion.
+        In fact I roll pixels(rm the last pixels on height and width and then add them at the front). That is also 
+        on of the reasons why not cropping did not work in my case. For the pyramid implementation I used the same align function,
+        creating the function called align_pyramid. It is recursive, and starts from the bottom. Level 1
+        does the approximately 400x400 rescaled picture. It then gets cropped in align. Then every level starts
+        from shifting the source into the best shift suggested from the previous level.
     </p> 
     <p>Below are the pictures I got from simple implementation</p>
     <div class="image-row">
@@ -27,6 +46,7 @@
         <img src="./media/monastery.jpg">
         <img src="./media/tobolsk.jpg">
     </div>
+    <p></p>
     <p>Below are the pictures I got from pyramid implementation</p>
     <div class="two-image-row">
         <img src="./media/church.tif">
