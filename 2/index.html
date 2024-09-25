@@ -78,6 +78,10 @@
         Here we can see that resharpened image is still blurry.
     </p>
     <h2>HYBRID IMAGES</h2>
+    <p>
+        Here we are taking two pictures, blend higher frequencies of one picture and lower frequencies of the other(sigma = 5).
+        This makes an image that leads to different interpretations at different distances.
+    </p>
     <div class="one-image-row">
         <img src="./media/hybrid_cat_Derek.png">
     </div>
@@ -125,5 +129,76 @@
             <p>Hybrid fft</p>
         </div>
     </div>
+    <h2>Multi-resolution blending</h2>
+    <p>In this part we implemented Gaussian and Laplacian stacks and use them for multi-resolution blending.
+        Created a mask with white left half and black right half.
+    </p>
+    <div class="grid-container">
+        <div class="grid-item"><img src="media/left_level_0.jpg" alt="Image 1"></div>
+        <div class="grid-item"><img src="media/left_level_1.jpg" alt="Image 2"></div>
+        <div class="grid-item"><img src="media/left_level_2.jpg" alt="Image 3"></div>
+        <div class="grid-item"><img src="media/left_level_3.jpg" alt="Image 4"></div>
+        <div class="grid-item"><img src="media/left_level_4.jpg" alt="Image 5"></div>
+        <div class="grid-item"><img src="media/right_level_0.jpg" alt="Image 6"></div>
+        <div class="grid-item"><img src="media/right_level_1.jpg" alt="Image 7"></div>
+        <div class="grid-item"><img src="media/right_level_2.jpg" alt="Image 8"></div>
+        <div class="grid-item"><img src="media/right_level_3.jpg" alt="Image 9"></div>
+        <div class="grid-item"><img src="media/right_level_4.jpg" alt="Image 10"></div>
+        <div class="grid-item"><img src="media/total_level_0.jpg" alt="Image 11"></div>
+        <div class="grid-item"><img src="media/total_level_1.jpg" alt="Image 12"></div>
+        <div class="grid-item"><img src="media/total_level_2.jpg" alt="Image 13"></div>
+        <div class="grid-item"><img src="media/total_level_3.jpg" alt="Image 14"></div>
+        <div class="grid-item"><img src="media/total_level_4.jpg" alt="Image 15"></div>
+    </div>
+
+    <p>These are left levels(1-5), right levels, and total levels. I am not sure why are they black&white after the third photo...
+        Final image below:
+    </p>
+    <div class="one-image-row">
+        <img src="./media/Blended image.jpg">
+    </div>
+    <p>
+        I was having so much fun making an oraple(orange and apple) that I thought what if we try to blend some pieces of art for part 2.4.
+        I downloaded "the great wave" and "fine wind, clear morning" by Hokusai, and tried blending the mountain into the wave. Images and a mask I made below: 
+    </p>
+    <div class="image-row">
+        <div class="image-with-caption-small">
+            <img src="./media/thegreatwave.jpeg">
+            <p>The Great Wave</p>
+        </div>
+        <div class="image-with-caption-small">
+            <img src="./media/Finewindclearmorning.jpeg">
+            <p>Fine wind, clear morning</p>
+        </div>
+        <div class="image-with-caption-small">
+            <img src="./media/mask.jpg">
+            <p>my mask;-;</p>
+        </div>
+    </div>
+    <p>
+        now, to blend them, as I formerly mentioned, I needed to make a mask. Other than than, I used the same methods.
+    </p>
+    <div class="grid-container">
+        <div class="grid-item"><img src="media/left_level_0_wave.jpg" alt="Image 1"></div>
+        <div class="grid-item"><img src="media/left_level_1_wave.jpg" alt="Image 2"></div>
+        <div class="grid-item"><img src="media/left_level_2_wave.jpg" alt="Image 3"></div>
+        <div class="grid-item"><img src="media/left_level_3_wave.jpg" alt="Image 4"></div>
+        <div class="grid-item"><img src="media/left_level_4_wave.jpg" alt="Image 5"></div>
+        <div class="grid-item"><img src="media/right_level_0_wave.jpg" alt="Image 6"></div>
+        <div class="grid-item"><img src="media/right_level_1_wave.jpg" alt="Image 7"></div>
+        <div class="grid-item"><img src="media/right_level_2_wave.jpg" alt="Image 8"></div>
+        <div class="grid-item"><img src="media/right_level_3_wave.jpg" alt="Image 9"></div>
+        <div class="grid-item"><img src="media/right_level_4_wave.jpg" alt="Image 10"></div>
+        <div class="grid-item"><img src="media/total_level_0_wave.jpg" alt="Image 11"></div>
+        <div class="grid-item"><img src="media/total_level_1_wave.jpg" alt="Image 12"></div>
+        <div class="grid-item"><img src="media/total_level_2_wave.jpg" alt="Image 13"></div>
+        <div class="grid-item"><img src="media/total_level_3_wave.jpg" alt="Image 14"></div>
+        <div class="grid-item"><img src="media/total_level_4_wave.jpg" alt="Image 15"></div>
+    </div>
+    <p>Now the failed, but not really image of the great wave blended with clear morning</p>
+    <div class="one-image-row">
+        <img src="./media/blended_great_wave.jpg">
+    </div>
 </body>
+
 </html>
