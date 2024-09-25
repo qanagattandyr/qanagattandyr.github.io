@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="style.css">
+    <title>Hell</title>
+</head>
+<body>
+    <h1>Having fun(hell) with filters and frequencies</h1>
+    <h2>Introduction</h2>
+    <p>
+        Here we are sharpening and blurring the image(1, 2.1), making hybrid images(2.2), and blending two pictures.
+    </p>
+    <h2>Having fun with filters</h2>
+    <p>
+       Here, I defined two operators, used convolve to produce partial derivatives etc. etc. Check the image for more info:)
+    </p> 
+    <h2>Below are the pictures I got.</h2>
+    <div class="image-with-caption">
+        <img src="./media/derivatives_figure.png">
+    </div>
+
+    <h2>This is 1.2, Derivative of Gaussian filter used</h2>
+    <div class="two-image-row">
+        <div class="image-with-caption-small">
+            <img src="./media/edge_image.png">
+            <p>edge image here</p>
+        </div>
+        <div class="image-with-caption-small">
+            <img src="./media/edge_image_blurred.png">
+            <p>blurred edge image here</p>
+        </div>
+    </div>
+    <p>
+       Here, I think they are really similar except for second part having more noise.
+    </p>
+    <p>
+        Going to part 2, called fun with frequencies(I did not have fun), we tried sharpening an image. We also tried blurring it.
+        We also tried sharpening the image, blurring it, and then sharpenning it again - just for fun(this was actually fun ig).
+    </p> 
+     <div class="image-row">
+        <div class="image-with-caption-small">
+            <img src="./media/original_taj.png">
+            <p>Original taj mahal pic here</p>
+        </div>
+        <div class="image-with-caption-small">
+            <img src="./media/sharpened_taj.png">
+            <p>This one I sharpened with alpha = 1.5</p>
+        </div>
+        <div class="image-with-caption-small">
+            <img src="./media/blurred_taj.png">
+            <p>this one I blurred with alpha = 1.5</p>
+        </div>
+    </div>
+    <h2>
+        I also tried using my own picture
+    </h2> 
+    <div class="image-row">
+        <div class="image-with-caption-small">
+            <img src="./media/original_palms.png">
+            <p>Original taj mahal pic here</p>
+        </div>
+        <div class="image-with-caption-small">
+            <img src="./media/sharpened_palms.png">
+            <p>This one I sharpened with alpha = 1.5</p>
+        </div>
+        <div class="image-with-caption-small">
+            <img src="./media/blurred_palms.png">
+            <p>this one I blurred with alpha = 1.5</p>
+        </div>
+    </div>
+    <h2>
+        Here is the fun part I mentioned before:
+    </h2> 
+    <div class="one-image-row">
+        <img src="./media/sharpened_and_blurred_palms_for_eval.png">
+    </div>
+    <p>
+        Here we can see that resharpened image is still blurry.
+    </p>
+    <h2>HYBRID IMAGES</h2>
+    <div class="one-image-row">
+        <img src="./media/hybrid_cat_Derek.png">
+    </div>
+    <p>
+        Here's a pic of Derek and cat. If you look from far away you can sense the presence of cat, however at a closer look it's Derek.
+    </p>
+    <div class="one-image-row">
+        <img src="./media/hybrid_image.png">
+    </div>
+    <p>
+        This is a picture of me and a guy who looks like me(no offense to the guy).
+    </p>
+    <div class="image-row">
+        <div class="image-with-caption-small">
+            <img src="./media/Danial.jpg">
+            <p>This is me here</p>
+        </div>
+        <div class="image-with-caption-small">
+            <img src="./media/Nurzh.jpg">
+            <p>This is Nurzhan</p>
+        </div>
+    </div>
+    <p>
+        Here are the ffts I got
+    </p>
+    <div class="image-row">
+        <div class="image-with-caption-small">
+            <img src="./media/im1_fft.png">
+            <p>first pic</p>
+        </div>
+        <div class="image-with-caption-small">
+            <img src="./media/im2_fft.png">
+            <p>Second pic</p>
+        </div>
+        <div class="image-with-caption-small">
+            <img src="./media/blurred_im1_fft.png">
+            <p>blurred first pic fft</p>
+        </div>
+        <div class="image-with-caption-small">
+            <img src="./media/high_pass_im2_fft.png">
+            <p>high pass second pic fft</p>
+        </div>
+        <div class="image-with-caption-small">
+            <img src="./media/hybrid_fft.png">
+            <p>Hybrid fft</p>
+        </div>
+    </div>
+</body>
+</html>
