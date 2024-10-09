@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="style.css">
+    <title>project 3</title>
+</head>
+<body>
+    <h1>Project 3: face morphing</h1>
+    <h2>Introduction</h2>
+    <p>
+        In this project I am trying to smoothly morph two images, manually selecting correspondences, using Delaunay triangulation and affine transformations.
+        I also compute mean of the dataset of 100 ppl, try to warp my face into the average, warp a few faces from the dataset, and create a caricature of myself.
+    </p>
+    <h2>Part 1: efining correspondences</h2>
+    <p>
+        I decided to do correspondences of Matthew Mcconaughey and Elon Musk. To define correspondences I used the given tool in project specification. Here's what I got
+    </p> 
+    <h2>Matthew Mcconaughey and Elon Musk images</h2>
+    <div class="two-image-row">
+        <div class="image-with-caption-small">
+            <img src="./media/Mcconaughey.jpg">
+            <p>Mcconaughey</p>
+        </div>
+        <div class="image-with-caption-small">
+            <img src="./media/Musk.jpg">
+            <p>Musk</p>
+        </div>
+    </div>
+    <h2>Below are the triagnulations I got.</h2>
+    <div class="image-with-caption">
+        <img src="./media/triangulation.png">
+    </div>
+
+    <h2>Part 2: Mid-way face</h2>
+    <p>
+        Here I computed the Mid-way face. To do that I used warp fraction and dissolve fraction(both 0.5). I created two empty images with the shape of our images, created blended points by
+         '(1 - warp_fraction) * points_img1 + warp_fraction * points_img2', warped triangles(bounding rects, create a mask, fillconvexpoly and then affine(w/ billinear interpolation)). 
+        In the end, I blened warped results doing '(1 - dissolve_fraction) * warped_img1 + dissolve_fraction * warped_img2' - using cross dissolve.
+    </p> 
+    <h2>Here's the midway image</h2>
+    <div class="image-with-caption">
+        <img src="./media/midway_transformation.png">
+    </div>
+    <h2>Part 3: morph sequence</h2>
+    <p>
+        Here, I just performed the same thing above, but getting 45 frames and making it a gif.
+    </p> 
+    <div class="gif">
+        <img src="./media/morph_sequence.gif" alt="Morphing Sequence" width="100" height="100">
+    </div>    
+    <h2>
+        Part 4: The "Mean face" of a population
+    </h2> 
+    <p>
+        Here, I downloaded a dataset of 100 faces, took the average and created the "average face".
+    </p> 
+    <div class="one-image-row">
+        <img src="./media/avg_face.png">
+    </div>
+    <p>
+        I used the average to warp myself and a few people from the dataset as an example
+    </p>
+    <div class="one-image-row">
+        <img src="./media/me_warped.png">
+    </div>
+    <div class="one-image-row">
+        <img src="./media/1a_morphed.png">
+    </div>
+    <div class="one-image-row">
+        <img src="./media/2a_morphed.png">
+    </div>
+    <div class="one-image-row">
+        <img src="./media/3a_morphed.png">
+    </div>
+    <h2>
+        Part 5: Caricatures
+    </h2> 
+    <p>
+        In this part I extrapolated the average using 'caricature_points = mean_points + extrapolation_factor * (keypoints - mean_points)', where the factor was > 1
+    </p> 
+    <div class="one-image-row">
+        <img src="./media/caricature.png">
+    </div>
+    <p>
+        I believe my pictures could've been better if they were made in a similar way, but I couldn't make a good one and ended up having this. However, the effect of average is clearly seen in dataset pictures.
+    </p> 
+</body>
+
+</html>
