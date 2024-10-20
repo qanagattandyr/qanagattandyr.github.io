@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="style.css">
+    <title>project 4</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LaTeX in HTML with MathJax</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <h1>project 4, part 1: IMAGE WARPING and MOSAICING</h1>
+    <h2>Introduction</h2>
+    <p>
+        In this project I try to perform image rectification and mosaicing using homographies.
+    </p>
+    <h2>Recover homographies</h2>
+    <p>
+        Firstly, we need to define correspondnces between pictures(I used the given tool: https://cal-cs180.github.io/fa23/hw/proj3/tool.html). Then, using these keypoints, we want to recover homographies: 
+        Here's how I did it. We have: \( pts1 = \{(x_1, y_1), (x_2, y_2), \dots, (x_n, y_n)\} \), \( pts2 = \{(x'_1, y'_1), (x'_2, y'_2), \dots, (x'_n, y'_n)\} \). 
+        To compute a homography matrix \( H \), For each pair of points \( (x_i, y_i) \) from \( pts1 \) and \( (x'_i, y'_i) \) from \( pts2 \), we create:
+
+        \[
+        M =
+        \begin{bmatrix}
+        x_1 & y_1 & 1 & 0 & 0 & 0 & -x_1 x'_1 & -y_1 x'_1 \\
+        0 & 0 & 0 & x_1 & y_1 & 1 & -x_1 y'_1 & -y_1 y'_1 \\
+        \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\
+        x_n & y_n & 1 & 0 & 0 & 0 & -x_n x'_n & -y_n x'_n \\
+        0 & 0 & 0 & x_n & y_n & 1 & -x_n y'_n & -y_n y'_n
+        \end{bmatrix}
+        \]
+        and then flatten points from points 2 into a vector\[
+        \mathbf{res\_coords} = 
+        \begin{bmatrix}
+        x'_1 \\
+        y'_1 \\
+        \vdots \\
+        x'_n \\
+        y'_n
+        \end{bmatrix}\]
+        Then, solve \( M \mathbf{h} = \mathbf{res\_coords} \), where \( \mathbf{h} \) is:
+        \[
+        \mathbf{h} = (h_1, h_2, h_3, h_4, h_5, h_6, h_7, h_8)
+        \]
+     
+    </p> 
+    <h2>Warping images</h2>
+    <p>
+       To warp images, I create interpolation functions for each channel using RectBivariateSpline. Then I apply inverse homography matrix to the grid of result coords, for each channel interpolate the pixel values, and return the result. In my function, I add the 
+       desired shape for the output as an input.
+    </p> 
+    <h2>Image rectification</h2>
+    <p>
+        For this part, I create a separate list of destination points that basically has all corners, and then define keypoints as corners of either portrait or poster.
+    </p> 
+    <div class="two-image-row">
+        <div class="image-with-caption-small">
+            <img src="./media/naturemorph.jpeg">
+            <p>original image</p>
+        </div>
+        <div class="image-with-caption-small">
+            <img src="./media/warped_naturemorph.jpg">
+            <p>warped</p>
+        </div>
+    </div>
+    <div class="two-image-row">
+        <div class="image-with-caption-small">
+            <img src="./media/poster.jpeg">
+            <p>original image</p>
+        </div>
+        <div class="image-with-caption-small">
+            <img src="./media/warped_poster.jpg">
+            <p>warped</p>
+        </div>
+    </div>
+    <h2>Mosaic</h2>
+    <p> Initially I tried mosaicing two images.Here's what I did:  </p> 
+    <p> 1. Compute homographies </p>
+    <p> 2. Determine the bounding box of the panorama </p> 
+    <p> 3. Shift images so that all coordinates are positive </p> 
+    <p> 4. Warp images </p> 
+    <p> 5. Create masks </p> 
+    <p> 6. Blend warped images </p> 
+    <p> For two images I got this </p> 
+    <div class="one-image-row">
+        <img src="./media/two_pics.jpg">
+    </div>
+    <p> Then, I tried doing the same thing with 4 pics, the only thing I changed was multiplying homographies </p> 
+    <div class="one-image-row">
+        <img src="./media/home.jpg">
+    </div>
+    <div class="one-image-row">
+        <img src="./media/bart.jpg">
+    </div>
+    <div class="one-image-row">
+        <img src="./media/cowork.jpg">
+    </div>
+    <h2> Reflection</h2>
+    <p> I think the maing problem here was bad pictures (shaky hands) and the fact that I tried to align to the first picture rather than the either second or third one. It was fun to learn how to manipulate pictures and 
+        see something that was hard to see initially like in one of the lectures with floor mosaic. Can't wait for the second part, where we wouldn't have to manually mark correspondences.
+    </p>
+</body>
+
+</html>
