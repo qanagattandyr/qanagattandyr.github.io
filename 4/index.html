@@ -15,6 +15,65 @@
     <p>
         In this project I try to perform image rectification and mosaicing using homographies.
     </p>
+    <h2>Here's the images Im working with</h2>
+
+    <div class="four-image-row">
+        <div class="image-with-caption">
+            <img src="./media/image_1.jpeg" alt="Image 1">
+            <p>Home 1</p>
+        </div>
+        <div class="image-with-caption">
+            <img src="./media/image_2.jpeg" alt="Image 2">
+            <p>Home 2</p>
+        </div>
+        <div class="image-with-caption">
+            <img src="./media/image_3.jpeg" alt="Image 3">
+            <p>Home 3</p>
+        </div>
+        <div class="image-with-caption">
+            <img src="./media/image_4.jpeg" alt="Image 4">
+            <p>Home 4</p>
+        </div>
+    </div>
+    
+    <div class="four-image-row">
+        <div class="image-with-caption">
+            <img src="./media/bart1.jpeg" alt="Image 1">
+            <p>Bart 1</p>
+        </div>
+        <div class="image-with-caption">
+            <img src="./media/bart2.jpeg" alt="Image 2">
+            <p>Bart 2</p>
+        </div>
+        <div class="image-with-caption">
+            <img src="./media/bart3.jpeg" alt="Image 3">
+            <p>Bart 3</p>
+        </div>
+        <div class="image-with-caption">
+            <img src="./media/bart4.jpeg" alt="Image 4">
+            <p>Bart 4</p>
+        </div>
+    </div>
+
+    <div class="four-image-row">
+        <div class="image-with-caption">
+            <img src="./media/cowork1.jpeg" alt="Image 1">
+            <p>wework 1</p>
+        </div>
+        <div class="image-with-caption">
+            <img src="./media/cowork2.jpeg" alt="Image 2">
+            <p>wework 2</p>
+        </div>
+        <div class="image-with-caption">
+            <img src="./media/cowork3.jpeg" alt="Image 3">
+            <p>wework 3</p>
+        </div>
+        <div class="image-with-caption">
+            <img src="./media/cowork4.jpeg" alt="Image 4">
+            <p>wework 4</p>
+        </div>
+    </div>
+
     <h2>Recover homographies</h2>
     <p>
         Firstly, we need to define correspondnces between pictures(I used the given tool: https://cal-cs180.github.io/fa23/hw/proj3/tool.html). Then, using these keypoints, we want to recover homographies: 
@@ -97,10 +156,111 @@
     <div class="one-image-row">
         <img src="./media/cowork.jpg">
     </div>
+    <h2> Harris Interest Point Detector </h2>
+    <p>
+        Running the skeleton code on my pictures gives me this result:
+    </p>
+    <div class="two-image-row">
+        <div class="image-with-caption-small">
+            <img src="./media/image_1.jpeg">
+            <p>initial</p>
+        </div>
+        <div class="image-with-caption-small">
+            <img src="./media/first_dots.png">
+            <p>skeleton code applied</p>
+        </div>
+    </div>
+    <h2> Adaptive Non-Maximal Suppression </h2>
+    <p>
+        in this part, I implemented ANMS to reduce the number of dots of potential keypoints. The result is below
+    </p>
+    <div class="two-image-row">
+        <div class="image-with-caption-small">
+            <img src="./media/first_dots.png">
+            <p>initial</p>
+        </div>
+        <div class="image-with-caption-small">
+            <img src="./media/anms_result.png">
+            <p>skeleton code applied</p>
+        </div>
+    </div>
+    <h2> Feature descriptors</h2>
+    <p>
+        Here's I extract feature descriptors(40x40 windows of 8x8 patches) and implement feature matching to find the best correspondences.
+        more formally: 
+        match_descriptors matches feature descriptors between two images by finding two euclidean distance of each pair and apply ratio test for reliable matches. 
+        extract_descriptors: extract a normalized descriptor for each point by downsampling images, also make it robust to brightness and contrast changes.
+    </p>
+    <div class="one-image-row">
+        <img src="./media/matching_dots.png">
+    </div>
+
+    <h2> Results are below</h2>
+    <p>
+        here's the resulst with two pics:
+    </p>
+    <div class="two-image-row">
+        <div class="image-with-caption-small">
+            <img src="./media/two_pics.jpg">
+            <p>manual</p>
+        </div>
+        <div class="image-with-caption-small">
+            <img src="./media/auto_stitched_mosaic.jpg">
+            <p>automatic</p>
+        </div>
+    </div>
+    <p>
+        here's the resulst with four pics:
+    </p>
+    <div class="one-image-row">
+        <img src="./media/automatic_mosaic_four_images.jpg">
+    </div>
+    <div class="one-image-row">
+        <img src="./media/automatic_mosaic_four_barts.jpg">
+    </div>
+    <div class="one-image-row">
+        <img src="./media/automatic_mosaic_four_weworks.jpg">
+    </div>
+    <p>
+        this is manual and automatic next to each other:
+    </p>
+    <div class="two-image-row">
+        <div class="image-with-caption-small">
+            <img src="./media/home.jpg">
+            <p>manual</p>
+        </div>
+        <div class="image-with-caption-small">
+            <img src="./media/automatic_mosaic_four_images.jpg">
+            <p>automatic</p>
+        </div>
+    </div>
+    <div class="two-image-row">
+        <div class="image-with-caption-small">
+            <img src="./media/bart.jpg">
+            <p>manual</p>
+        </div>
+        <div class="image-with-caption-small">
+            <img src="./media/automatic_mosaic_four_barts.jpg">
+            <p>automatic</p>
+        </div>
+    </div>
+    <div class="two-image-row">
+        <div class="image-with-caption-small">
+            <img src="./media/cowork.jpg">
+            <p>manual</p>
+        </div>
+        <div class="image-with-caption-small">
+            <img src="./media/automatic_mosaic_four_weworks.jpg">
+            <p>automatic</p>
+        </div>
+    </div>
     <h2> Reflection</h2>
     <p> I think the maing problem here was bad pictures (shaky hands) and the fact that I tried to align to the first picture rather than the either second or third one. It was fun to learn how to manipulate pictures and 
-        see something that was hard to see initially like in one of the lectures with floor mosaic. Can't wait for the second part, where we wouldn't have to manually mark correspondences.
+        see something that was hard to see initially like in one of the lectures with floor mosaic. Can't wait for the second part, where we wouldn't have to manually mark correspondences. For the part B it took me forever 
+        to center towards the third picturesm because I don't use the same homographies structure as I did before. 
     </p>
+
+
 </body>
 
 </html>

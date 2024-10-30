@@ -182,3 +182,27 @@ img {
     margin: 0 auto; 
 }
 
+.four-image-row {
+    padding: 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 10px; /* Space between images */
+}
+
+.image-with-caption {
+    text-align: center; /* Center the text below each image */
+    width: 23%; /* Adjust width to fit four images side by side */
+}
+
+.image-with-caption img {
+    width: 100%;
+    height: auto;
+}
+
+.image-with-caption p {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #333;
+}
