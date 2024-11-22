@@ -65,8 +65,9 @@ body {
 }
 
 .one-image-row img {
-    width: 50%;
-    height: auto;
+    width: 30%;
+    height: 30%;
+    max-width: 30%;
 }
 
 .text-container {
@@ -206,3 +207,24 @@ img {
     font-size: 14px;
     color: #333;
 }
+
+
+.six-image-row {
+    display: flex;
+    justify-content: space-between; /* Evenly distribute images */
+    align-items: center;            /* Vertically center images */
+    flex-wrap: nowrap;              /* Keep images in a single line */
+    padding: 10px;                  /* Optional: Add padding around the container */
+    background-color: #f9f9f9;      /* Optional: Add background color */
+}
+
+.six-image-row img {
+    width: 16%;                     /* Each image takes 16% of the row width */
+    height: auto;                   /* Maintain aspect ratio */
+    max-width: 100%;                /* Prevent images from exceeding their container */
+    object-fit: contain;            /* Prevent distortion */
+    margin: 0;                      /* Remove default margins */
+    box-sizing: border-box;         /* Include padding/border in the size calculation */
+}
+
+

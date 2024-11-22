@@ -1,0 +1,208 @@
+h1 {
+    font-family: 'Montserrat', sans-serif;
+	position: relative;
+	/* top: 7.37vh; 72px; */
+	text-align: center;
+	/* font-size: 5.73vh; 56px; */
+	/* letter-spacing: 0.12vw; 2px; */
+	/* font-weight: 700; */
+}
+
+h2 {
+    /* padding-top: 8px; */
+	text-align: center;
+    font-weight: 500;
+    font-size: 1.4rem;
+	margin: 3% 5%;
+}
+  
+p {
+    /* padding-top: 8px; */
+    font-weight: 500;
+    /* font-size: 1.4rem; */
+    margin: 5%;
+	/* padding: 3%; */
+	/* border: 10%; */
+}
+  
+body {
+	font-family: Arial, sans-serif;
+	margin: 20px;
+}
+
+.image-row {
+    padding: 0; /* Remove padding to bring images closer to text */
+    display: flex;
+    justify-content: space-around; 
+    align-items: flex-start; 
+    flex-wrap: wrap; 
+    margin-bottom: 10px; /* Reduce space between images and text */
+}
+
+.image-row img {
+    width: 30%; 
+    height: auto;
+    max-width: 100%; /* Ensure images don't overflow their container */
+    object-fit: contain; /* Prevent the image from being distorted */
+}
+
+.two-image-row {
+    padding: 5%;
+	display: flex;
+	justify-content: space-between; 
+}
+.two-image-row img {
+	width: 48%; 
+	height: auto;
+}
+
+.one-image-row {
+    padding: 3%;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    /* height: 100vh;  */
+}
+
+.one-image-row img {
+    width: 50%;
+    height: auto;
+}
+
+.text-container {
+    display: flex; 
+    justify-content: space-around; 
+    gap: 2%; 
+    text-align: center; 
+    margin-top: 0; /* Remove extra top margin */
+    margin-bottom: 20px; /* Optional: Add small bottom margin for clarity */
+    flex-wrap: wrap;
+}
+
+.text-container div {
+    font-weight: 100;
+    margin: 0;
+    padding: 0;
+    max-width: 30%;
+}
+
+
+/* Adjust the margin on the container holding the images */
+.image-container {
+    margin-bottom: 0; /* Set to 0 or a smaller value */
+}
+
+/* Adjust the margin on the heading or paragraph directly above the images */
+h1, h2, p {
+    margin-bottom: 5px; /* Reduce the bottom margin */
+}
+
+/* If the text is within a container that directly follows the images */
+.text-container {
+    margin-top: 0; /* Remove the top margin to close the gap */
+}
+
+.two-image-row {
+    padding: 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; /* Align images to the top */
+    flex-wrap: wrap;
+}
+
+.image-with-caption {
+    align-items: center;
+    align-self: center;
+    align-content: center;
+    text-align: center; /* Center the text below each image */
+    width: 48%; /* Adjust the width to fit both images side by side */
+}
+
+.image-with-caption img {
+    align-self: center;
+    width: 200%;
+    height: auto;
+}
+
+.image-with-caption p {
+    margin-top: 10px; /* Add a small margin between the image and the text */
+    font-size: 14px; /* Adjust the font size if needed */
+    color: #333; /* Change the text color if necessary */
+}
+
+img {
+    width: 80%; /* Set this to a percentage to downscale the image */
+    height: auto; /* This maintains the aspect ratio */
+}
+
+.image-with-caption-small {
+    /* align-items: center; */
+    /* align-self: center; */
+    /* align-content: center; */
+    text-align: center; /* Center the text below each image */
+    width: 48%; /* Adjust the width to fit both images side by side */
+}
+
+.image-with-caption-small img {
+    align-self: center;
+    width: 100%;
+    height: auto;
+}
+
+.image-with-caption-small p {
+    margin-top: 10px; /* Add a small margin between the image and the text */
+    font-size: 14px; /* Adjust the font size if needed */
+    color: #333; /* Change the text color if necessary */
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-auto-rows: auto;
+    gap: 10px;
+    padding: 10px;
+}
+
+.grid-item {
+    width: 100%;
+    height: auto;
+}
+
+.grid-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+
+.gif img {
+    width: 50%; 
+    height: auto; 
+    display: block; 
+    margin: 0 auto; 
+}
+
+.four-image-row {
+    padding: 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 10px; /* Space between images */
+}
+
+.image-with-caption {
+    text-align: center; /* Center the text below each image */
+    width: 23%; /* Adjust width to fit four images side by side */
+}
+
+.image-with-caption img {
+    width: 100%;
+    height: auto;
+}
+
+.image-with-caption p {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #333;
+}

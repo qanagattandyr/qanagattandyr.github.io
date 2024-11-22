@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- comment to rerun check-->
+    <link rel="stylesheet" href="style.css">
+    <title>project 5</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LaTeX in HTML with MathJax</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <h1>project 5: Fun With Diffusion Models!</h1>
+    <h2>Introduction</h2>
+    <p>
+        In this project I will implement and deploy diffusion models for image generation.
+    </p>
+
+    <h2>Part 0</h2>
+    <p>
+        I used the given sample code to produce images in different inference steps with seed 777. I use the same seed in the whole part A.
+    </p> 
+    <h2>10 steps</h2>
+
+    <div class="image-row">
+        <img src="./media/man_hat_10.png">
+        <img src="./media/village_10.png">
+        <img src="./media/rocket_10.png">
+    </div>
+    <h2>50 steps</h2>
+    <div class="image-row">
+        <img src="./media/man_hat_50.png">
+        <img src="./media/village_50.png">
+        <img src="./media/rocket_50.png">
+    </div>
+    <h2>1.1 Forward process</h2>
+    <p> I used the equation below here to add noise to campanile(given picture). Results below
+    \[
+    x_t = \sqrt{\bar{\alpha}_t} x_0 + \sqrt{1 - \bar{\alpha}_t} \epsilon \quad \text{where} \quad \epsilon \sim \mathcal{N}(0, 1)
+    \]
+    </p> 
+    <div class="image-row">
+        <img src="./media/noisy_0.png">
+    </div>
+    <div class="image-row">
+
+        <img src="./media/noisy_250.png">
+        <img src="./media/noisy_500.png">
+        <img src="./media/noisy_750.png">
+    </div>
+    <h2> 1.2 Classical Denoising </h2>
+    <p>
+        Here we're trying to denoise using gaussian filter blur 
+    </p>
+    <div class="image-row">
+        <img src="./media/gaussian_noisy_250.png">
+        <img src="./media/gaussian_noisy_500.png">
+        <img src="./media/gaussian_noisy_750.png">
+    </div>
+    <h2> 1.3 one step denoising </h2>
+    <p>
+        use the pretrained diffusion model to denoise the image
+    </p>
+    <div class="image-row">
+        <img src="./media/1.3_noisy_250.png">
+    </div>
+    <div class="image-row">
+        <img src="./media/1.3_noisy_500.png">
+    </div>
+    <div class="image-row">
+        <img src="./media/1.3_noisy_750.png">
+    </div>
+
+    
+    <h2> 1.4 Implementing Iterative Denoising </h2>
+    <p>
+        tried to get much better result by denoising in steps to get a clear image.
+        \[
+        x_{t'} = \frac{\sqrt{\bar{\alpha}_{t'} \beta_t}}{1 - \bar{\alpha}_t} x_0 
+        + \frac{\sqrt{\alpha_t}(1 - \bar{\alpha}_{t'})}{1 - \bar{\alpha}_t} x_t 
+        + v_\sigma
+        \]
+
+    </p>
+    <p>
+        <b>Where:</b>
+    </p>
+    <ul>
+        <li>\(x_t\) is your image at timestep \(t\)</li>
+        <li>\(x_{t'}\) is your noisy image at timestep \(t'\) where \(t' < t\) (less noisy)</li>
+        <li>\(\bar{\alpha}_t\) is defined by <code>alphas_cumprod</code>, as explained above.</li>
+        <li>\(\alpha_t = \frac{\bar{\alpha}_t}{\bar{\alpha}_{t'}}\)</li>
+        <li>\(\beta_t = 1 - \alpha_t\)</li>
+        <li>\(x_0\) is our current estimate of the clean image using equation A.2, just like in section 1.3</li>
+    </ul>
+
+    <h2> Results are below</h2>
+
+    <div class="image-row">
+        <img src="./media/denoised_90.png">
+        <img src="./media/denoised_240.png">
+        <img src="./media/denoised_390.png">
+        <img src="./media/denoised_540.png">
+        <img src="./media/denoised_690.png">
+        <img src="./media/final_clean_denoise.png">
+    </div>
+    <h2>
+        1.5 diffusion model sampling
+    </h2>
+    <p>
+        did the same thing as in 1.4 but with random noise, results below
+    </p>
+    <div class="image-row">
+        <img src="./media/1.5_generated_1.png">
+        <img src="./media/1.5_generated_2.png">
+
+        <img src="./media/1.5_generated_3.png">
+
+        <img src="./media/1.5_generated_4.png">
+
+        <img src="./media/1.5_generated_5.png">
+    </div>
+    <h2>
+        1.6 Classifier-Free Guidance (CFG)
+    </h2>
+    <p>
+       computed both conditional and unconditional noise estimate, used this
+        \[
+            \epsilon = \epsilon_u + \gamma (\epsilon_c - \epsilon_u)
+        \]
+        to get better results:
+    </p>
+    <div class="one-image-row">
+        <img src="./media/1.6_cfg.png">
+    </div>
+    <h2>
+        1.7  Image to Image Translation
+    </h2>
+    <p>
+        take an image, add noise to it and then denoise it to get a bit different image:).
+    </p>
+    <div class="image-row">
+        <img src="./media/1.7_start.png">
+    </div>
+    <div class="image-row">
+        <img src="./media/1.7.1_custom_po.png">
+    </div>
+    <div class="image-row">
+        <img src="./media/1.7.1_custom_pvz.png">
+    </div>
+    <h2>
+        Hand Drawn and web images:
+    </h2>
+    <p>
+        let's start with custom, original first, and then epochs
+    </p>
+    <div class="image-row">
+        <img src="./media/avatar_original.png">
+    </div>
+    <div class="image-row">
+        <img src="./media/1.7_custom_avatar_1.png">
+        <img src="./media/1.7_custom_avatar_3.png">
+        <img src="./media/1.7_custom_avatar_5.png">
+        <img src="./media/1.7_custom_avatar_7.png">
+        <img src="./media/1.7_custom_avatar_10.png">
+        <img src="./media/1.7_custom_avatar_20.png">
+    </div>
+    <h2>
+        first doodle
+    </h2>
+    <div class="image-row">
+        <img src="./media/doodle.png">
+    </div>
+    <div class="image-row">
+        <img src="./media/doodle_1.png">
+        <img src="./media/doodle_3.png">
+        <img src="./media/doodle_5.png">
+        <img src="./media/doodle_7.png">
+        <img src="./media/doodle_10.png">
+        <img src="./media/doodle_20.png">
+    </div>
+    <p>
+        second doodle
+    </p>
+    <div class="image-row">
+        <img src="./media/doodle_car.png">
+    </div>
+    <div class="image-row">
+        <img src="./media/doodle_car_1.png">
+        <img src="./media/doodle_car_3.png">
+        <img src="./media/doodle_car_5.png">
+        <img src="./media/doodle_car_7.png">
+        <img src="./media/doodle_car_10.png">
+        <img src="./media/doodle_car_20.png">
+    </div>
+    <h2>
+        1.7.2 Inpainting
+    </h2>
+    <p>
+        in this part we use a mask to apply a process to specific location of the image.
+    </p>
+    <div class="image-row">
+        <img src="./media/campanile_to_replace.png">
+        <img src="./media/replace.png">
+        <img src="./media/mask.png">
+    </div>
+    <h2>
+        result:
+    </h2>
+    <div class="image-row">
+        <img src="./media/replaced_campanile.png">
+    </div>
+    <div class="image-row">
+        <img src="./media/po_child.jpg">
+        <img src="./media/replace_po.png">
+        <img src="./media/mask_po.png">
+    </div>
+    <h2>
+        result:
+    </h2>
+    <div class="image-row">
+        <img src="./media/po_replaced.png">
+    </div>
+    <div class="image-row">
+        <img src="./media/Sunflower.png">
+        <img src="./media/sunflower_replace.png">
+        <img src="./media/sunflower_mask.png">
+    </div>
+    <h2>
+        result:
+    </h2>
+    <div class="image-row">
+        <img src="./media/sunflower_replaced.png">
+    </div>
+    <h2>
+        1.7.3 Text-Conditional Image-to-Image Translation
+    </h2>
+    <p> 
+        Use a prompt to translate an image. The next one is rocket prompt on campanile
+    </p>
+    <div class="image-row">
+        <img src="./media/campanile_rocket_1.png">
+        <img src="./media/campanile_rocket_3.png">
+        <img src="./media/campanile_rocket_5.png">
+        <img src="./media/campanile_rocket_7.png">
+        <img src="./media/campanile_rocket_10.png">
+        <img src="./media/campanile_rocket_20.png">
+    </div>
+    <h2> 
+       This one is rocket to panda 
+    </h2>
+    <div class="image-row">
+        <img src="./media/rocket_po_1.png">
+        <img src="./media/rocket_po_3.png">
+        <img src="./media/rocket_po_5.png">
+        <img src="./media/rocket_po_7.png">
+        <img src="./media/rocket_po_10.png">
+        <img src="./media/rocket_po_20.png">
+    </div>
+    <h2> 
+        The last one - rocket prompt on sunflower from Plants vs Zombies
+    </h2>
+     <div class="image-row">
+         <img src="./media/rocket_sunflower_1.png">
+        <img src="./media/rocket_sunflower_3.png">
+        <img src="./media/rocket_sunflower_5.png">
+        <img src="./media/rocket_sunflower_7.png">
+        <img src="./media/rocket_sunflower_10.png">
+        <img src="./media/rocket_sunflower20.png">
+    </div>
+    <h2>
+        1.8 visual anagrams
+    </h2>
+    <p> 
+        This part the main idea is making different optical models. The first one is an image that looks like one thing when shown correctly,
+        and shows a complete different thing when flipped. To do this, we denoise an image with two prompts(one upside down) at every step to get noise est., and then flip the flipped 
+        denoised image back and add it to the first one. To make more sense, here's the equation:
+        \[\epsilon_1 = \text{UNet}(x_t, t, p_1) \]
+
+        \[\epsilon_2 = \text{flip}(\text{UNet}(\text{flip}(x_t), t, p_2)) \]
+
+        \[ \epsilon = (\epsilon_1 + \epsilon_2) / 2 \]
+        The first visual illusion is an oil painting of old man x an oil painting of people around campfire
+    </p>
+    <div class="image-row">
+        <img src="./media/old_man_up.png">
+        <img src="./media/campfire_down.png">
+    </div>
+    <p> 
+        the second one is pen x rocket, which, I initally thought was a good mix. After a few runs, I realized it is not a good choice.
+    </p>
+    <div class="image-row">
+        <img src="./media/pen.png">
+        <img src="./media/rocket.png">
+    </div>
+    <p> 
+        the third one is a man and a dog mix:
+    </p>
+    <div class="image-row">
+        <img src="./media/man.png">
+        <img src="./media/dog.png">
+    </div>
+    <p> 
+        1.10 Hybrid images of my assignment is an illusion with distance, the first one is supposed to be a lithograph of waterfall to a lithograph of a skull, done like this:
+        \[ \epsilon_1 = \text{UNet}(x_t, t, p_1) \]
+
+        \[ \epsilon_2 = \text{UNet}(x_t, t, p_2) \]
+
+        \[ \epsilon = f_\text{lowpass}(\epsilon_1) + f_\text{highpass}(\epsilon_2) \]
+        Below are three of my tries on prompts: "waterfall" + "skull", "pen" + "skull", "amalfi cost" + "campfire"
+    </p>
+    <div class="image-row">
+        <img src="./media/waterfall_skull.png">
+        <img src="./media/pens_close.png">
+        <img src="./media/amalfi_cost_close.png">
+    </div>
+    <h2> Part B</h2>
+    <p> 
+        in this part we implement, UNet, use it to train a denoiser, and then try to add time and class condition. Some info on UNet below:
+    </p>
+    <div class="image-row">
+        <img src="./media/unconditional_arch.png">
+        <img src="./media/atomic_ops_new.png">
+    </div>
+    <p> 
+        This is what uncond UNet looks like. First, we implement noise algorithm though. Here's what the process looks like with different sigma values:
+    </p>
+    <div class="image-row">
+        <img src="./media/noise_sigma_values.png">
+    </div>
+    <p> 
+        Then we train our uncond UNet on sigma=0.5, and here are the results after the first and fifth(last) epoch:
+    </p>
+    <div class="image-row">
+        <img src="./media/epoch_1_unconditional.png">
+    </div>
+    <div class="image-row">
+
+        <img src="./media/epoch_5_unconditional.png">
+    </div>
+
+    <p> 
+        My training loss curve below:
+    </p>
+    <div class="image-row">
+        <img src="./media/tranining_loss_unconditional.png">
+    </div>
+    <p> 
+        I tried to use my trained model on different sigma values, and this is what I got:
+    </p>
+    <div class="image-row">
+        <img src="./media/different_noises_uncond.png">
+    </div>
+    <h2> 
+        Part 2: Training a Diffusion Model.
+    </h2>
+    <p>
+        Here I added my time conditioning to UNet, here's the diagram for more understanding
+    </p>
+    <div class="image-row">
+        <img src="./media/conditional_arch.png">
+        <img src="./media/fc_long.png">
+    </div>
+    <h2>
+        Here are some results after epoch 5
+    </h2>
+    <div class="image-row">
+        <img src="./media/epoch_5_time_cond.png">
+    </div>
+    <h2>
+        epoch 20
+    </h2>
+    <div class="image-row">
+        <img src="./media/epoch_20_time.png">
+    </div>
+    <h2>
+        training loss curve:
+    </h2>
+    <div class="image-row">
+        <img src="./media/training_loss_time.png">
+    </div>
+    <h2> 
+        Trying out class conditioned
+    </h2>
+    <p> 
+        It was implemented so that specific digit could be generated. For this implementation, I added
+        additional blocks and new value passed around - c(was given).
+    </p>
+    <h2>
+        Here are some results after epoch 5
+    </h2>
+    <div class="image-row">
+        <img src="./media/epoch_5_time_cond.png">
+    </div>
+    <h2>
+        epoch 20
+    </h2>
+    <div class="image-row">
+        <img src="./media/epoch_5_time_cond.png">
+    </div>
+</body>
+
+</html>
