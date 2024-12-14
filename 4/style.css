@@ -31,7 +31,7 @@ body {
 }
 
 .image-row {
-    padding: 0; /* Remove padding to bring images closer to text */
+    padding: 50; /* Remove padding to bring images closer to text */
     display: flex;
     justify-content: space-around; 
     align-items: flex-start; 

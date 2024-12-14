@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- comment to rerun check-->
+    <link rel="stylesheet" href="style.css">
+    <title>project 6</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LaTeX in HTML with MathJax</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <h1>project 6: Pre-canned projects</h1>
+    <h3>done by: Danial Toktarbayev, Mustafa Mirza</h3>
+    <p>For our final project we did three projects: Light Field Camera, High Dynamic Range Imaging, and Gradient Fusion Domain</p>
+    <h2>Light Field Camera</h2>
+    <h2>Task 1 - Depth Refocusing</h2>
+    <p>
+        In this task, we implemented digital refocusing using light field data captured from a grid of camera positions. We processed multiple images from the Stanford Light Field Archive by applying perspective shifts based on camera positions and combining them to achieve selective focus at different depths. The key insight was that objects at different depths exhibit varying parallax across the image grid - distant objects show minimal position changes while nearby objects show significant shifts. By calculating appropriate perspective transformations and combining the shifted images, we could control which depth appears sharp in the final image. Our implementation used the concept that averaging aligned images after applying depth-dependent shifts allows us to synthetically adjust the focal plane after capture.
+    </p>
+
+    <div class="gif">
+        <img src="./media/chess_focus.gif" width="100" height="100">
+    </div>    
+    <p>
+        We did the same thing with other pics too, and here's what we got:
+    </p> 
+    <div class="gif">
+        <img src="./media/candy_focus.gif" width="100" height="100">
+    </div>    
+    <div class="gif">
+        <img src="./media/chain_focus.gif" width="100" height="100">
+    </div>    
+    <h2>Task 2 - Apertures</h2>
+    <p>
+        For the aperture adjustment task, we simulated different lens aperture sizes by selectively combining subsets of the light field images. We implemented this by filtering perspective shifts based on their magnitudes - using more shifts corresponds to a larger synthetic aperture while fewer shifts creates a smaller effective aperture. In our code, we used numpy arrays to calculate maximum allowed displacement and implemented filtering using a simple distance-based threshold that determined which camera positions to include. For each aperture value in our test range (0.1 to 1.0), we created filtered subsets of the perspective shifts and their corresponding images, then combined them to generate the final synthetic photographs. This demonstrated how light field capture enables post-capture aperture control, allowing us to trade off depth of field versus light gathering after the fact. The implementation helped us understand how simple geometric constraints and image averaging can simulate complex optical effects.
+    </p> 
+    <div class="gif">
+        <img src="./media/chess_DOF.gif" width="100" height="100">
+    </div>    
+    <div class="gif">
+        <img src="./media/candy_DOF.gif" width="100" height="100">
+    </div>  
+    <div class="gif">
+        <img src="./media/chain_DOF.gif" width="100" height="100">
+    </div>  
+    <h2>Summary</h2>
+    <p>
+        Through this project, we learned how capturing multiple regular 2D photographs from different viewpoints arranged in a grid can enable powerful computational photography effects. By processing these multi-view images using perspective shifts and selective averaging, we could simulate effects like refocusing at different depths and adjusting the apparent aperture size after capture. The project demonstrated that even without specialized light field camera hardware, we can achieve interesting computational photography capabilities by clever processing of multiple standard photographs taken from different positions. This helped us understand both the power and limitations of multi-view image processing for creating synthetic photographic effects.
+    </p>
+    <h2>Bells & Whistles: Interactive Refocusing</h2>
+    <div class="image-row">
+        <img src="./media/interactive_chess_pt.png">
+    </div>
+    <div class="image-row">
+        <img src="./media/interactive_chess_refocus.png">
+    </div>
+
+    <h2>High Dynamic Range Imaging</h2>
+    <h2>Radiance map construction</h2>
+    <p> 
+        We have several images of the same place with different exposures.
+        First, we implemented a function solve_g given to us in starter code. This is basically implementing least squares algorithm to estimate g and unknown ln(E_i) for each pixel, based on 
+        on the i-th pixel in image j. Here's the formula: 
+        \[
+        \mathcal{O} = \sum_{i=1}^{N} \sum_{j=1}^{P} \left[ g(Z_{ij}) - \ln E_i - \ln \Delta t_j \right]^2 + 
+        \lambda \sum_{z=Z_{\text{min}}+1}^{Z_{\text{max}}-1} \left[ g''(z) \right]^2
+        \]
+    </p> 
+    <p>Here's a few graphs that we got for different images(arch, chapel, and window):</p>
+    <div class="image-row">
+        <img src="./media/results_arch/log_exp.png">
+        <img src="./media/results_chapel/log_graph.png">
+        <img src="./media/results_window/window_log.png">
+    </div>
+    <p>bonsai and garage</p>
+    <div class="image-row">
+        <img src="./media/results_bonsai/log_bonsai.png">
+        <img src="./media/results_garage/log_garage.png">
+    </div>
+
+    <h2> Our radiance map: </h2>
+    <p>arch, chapel, and window</p>
+    <div class="image-row">
+        <img src="./media/results_arch/hdr_radiance_map_mean.png">
+        <img src="./media/results_chapel/hdr_radiance_map_mean.png">
+        <img src="./media/results_window/hdr_radiance_map_mean.png">
+    </div>
+    <p>bonsai and garage</p>
+    <div class="image-row">
+        <img src="./media/results_bonsai/hdr_radiance_map_mean.png">
+        <img src="./media/results_garage/hdr_radiance_map_mean.png">
+    </div>
+    <h2>
+        Tone mapping
+    </h2>
+    <p>
+        Now we want to clearly show the image, for which we compute global intensity(averaging) and scale colors by it. 
+    </p>
+    <div class="image-row">
+        <div class="image-with-caption">
+            <img src="./media/results_arch/global_scale.png" alt="Image 1">
+            <p>arch global scaling</p>
+        </div>
+        <div class="image-with-caption">
+            <img src="./media/results_arch/global_simple.png" alt="Image 2">
+            <p>arch global simple</p>
+        </div>
+        <div class="image-with-caption">
+            <img src="./media/results_arch/durand.png" alt="Image 3">
+            <p>durand</p>
+        </div>
+    </div>
+    <div class="image-row">
+        <div class="image-with-caption">
+            <img src="./media/results_chapel/global_scale.png" alt="Image 1">
+            <p>chapel global scaling</p>
+        </div>
+        <div class="image-with-caption">
+            <img src="./media/results_chapel/global_simple.png" alt="Image 2">
+            <p>global simple</p>
+        </div>
+        <div class="image-with-caption">
+            <img src="./media/results_chapel/durand.png" alt="Image 3">
+            <p>durand</p>
+        </div>
+    </div>
+    <div class="image-row">
+        <div class="image-with-caption">
+            <img src="./media/results_bonsai/global_scale.png" alt="Image 1">
+            <p>bonsai global scaling</p>
+        </div>
+        <div class="image-with-caption">
+            <img src="./media/results_bonsai/global_simple.png" alt="Image 2">
+            <p>global simple</p>
+        </div>
+        <div class="image-with-caption">
+            <img src="./media/results_bonsai/durand.png" alt="Image 3">
+            <p>durand</p>
+        </div>
+    </div>
+    <div class="image-row">
+        <div class="image-with-caption">
+            <img src="./media/results_garage/global_scale.png" alt="Image 1">
+            <p>garage global scaling</p>
+        </div>
+        <div class="image-with-caption">
+            <img src="./media/results_garage/global_simple.png" alt="Image 2">
+            <p>global simple</p>
+        </div>
+        <div class="image-with-caption">
+            <img src="./media/results_garage/durand.png" alt="Image 3">
+            <p>durand</p>
+        </div>
+    </div>
+    <div class="image-row">
+        <div class="image-with-caption">
+            <img src="./media/results_garden/global_scale.png" alt="Image 1">
+            <p>garden global scaling</p>
+        </div>
+        <div class="image-with-caption">
+            <img src="./media/results_garden/global_simple.png" alt="Image 2">
+            <p>global simple</p>
+        </div>
+        <div class="image-with-caption">
+            <img src="./media/results_garden/durand.png" alt="Image 3">
+            <p>durand</p>
+        </div>
+    </div>
+    <div class="image-row">
+        <div class="image-with-caption">
+            <img src="./media/results_house/global_scale.png" alt="Image 1">
+            <p>house global scaling</p>
+        </div>
+        <div class="image-with-caption">
+            <img src="./media/results_house/global_simple.png" alt="Image 2">
+            <p>global simple</p>
+        </div>
+        <div class="image-with-caption">
+            <img src="./media/results_house/durand.png" alt="Image 3">
+            <p>durand</p>
+        </div>
+    </div>
+    <div class="image-row">
+        <div class="image-with-caption">
+            <img src="./media/results_mug/global_scale.png" alt="Image 1">
+            <p>mug global scaling</p>
+        </div>
+        <div class="image-with-caption">
+            <img src="./media/results_mug/global_simple.png" alt="Image 2">
+            <p>global simple</p>
+        </div>
+        <div class="image-with-caption">
+            <img src="./media/results_mug/durand.png" alt="Image 3">
+            <p>durand</p>
+        </div>
+    </div>
+    <div class="image-row">
+        <div class="image-with-caption">
+            <img src="./media/results_window/global_scale.png" alt="Image 1">
+            <p>garden global scaling</p>
+        </div>
+        <div class="image-with-caption">
+            <img src="./media/results_window/global_simple.png" alt="Image 2">
+            <p>global simple</p>
+        </div>
+        <div class="image-with-caption">
+            <img src="./media/results_window/durand.png" alt="Image 3">
+            <p>durand</p>
+        </div>
+    </div>
+    <h2>
+        Bells & Whistles: local tone mapping algorithm
+    </h2>
+    <p>
+        Simplified local tone mapping algorithm using Gaussian pyramids for local contrast adjustment. Results below:
+    </p>
+    <div class="image-row">
+        <img src="./media/hdr_bnw_local_simple/local_simple_garden.png">
+        <img src="./media/hdr_bnw_local_simple/local_simple_bonsai.png">
+        <img src="./media/hdr_bnw_local_simple/local_simple_arch.png">
+    </div>
+    <div class="image-row">
+        <img src="./media/hdr_bnw_local_simple/local_simple_garage.png">
+        <img src="./media/hdr_bnw_local_simple/local_simple_mug.png">
+        <img src="./media/hdr_bnw_local_simple/local_simple_window.png">
+    </div>
+    <div class="image-row">
+        <img src="./media/hdr_bnw_local_simple/local_simple_chapel.png">
+        <img src="./media/hdr_bnw_local_simple/local_simple_house.png">
+    </div>
+    <h2>Summary</h2>
+    <p>
+        This project taught us to create high dynamic range images by combining multiple exposures. We were introduced to 
+        the Debevec and Malik 1997 method. Additionaly learned adding global and local tone to make the radiance map displayable. Even though local tone does not look as 
+        good as global tone, it taught us a different technique.
+    </p>
+    <h2>Gradien Domain Fusion</h2>
+    <h2>Toy problem</h2>
+    <p>
+        So in this part we're trying to recreate the image by computing the x and y gradients from a source image plus one pixel intensity.
+        The formula looks like this: minimize ( v(x+1,y)-v(x,y) - (s(x+1,y)-s(x,y)) )^2, minimize ( v(x,y+1)-v(x,y) - (s(x,y+1)-s(x,y)) )^2, and minimize (v(1,1)-s(1,1))^2	 where s in intensity of source image at x, y, and v is the value of the image at x, y.
+        results are below
+    </p>
+    <div class="image-row">
+        <img src="./media/samples/toy_problem.png">
+        <img src="./media/recreaetd.png">
+    </div>
+    <h2>Poisson Blending</h2>
+    <p> Used the function below to minimize the intensity of gradients between the source and background images withing the masked area. Poisson blessing showed better results than Laplacian pyramid, even though it looks like the background of 
+        source image did not fully disappear.
+        $$ 
+        \mathbf{v} = \arg\min_{\mathbf{v}} \sum_{i \in S, j \in N_i \cap S} \left( (v_i - v_j) - (s_i - s_j) \right)^2 
+        + \sum_{i \in S, j \in N_i \cap \neg S} \left( (v_i - t_j) - (s_i - s_j) \right)^2
+        $$
+    </p>
+    <p>background and source images:</p>
+    <div class="image-row">
+        <img src="./media/samples/im2.JPG">
+        <img src="./media/samples/penguin-chick.jpeg">
+    </div>
+    <div class="image-row">
+        <div class="image-with-caption">
+            <img src="./media/preparation.png">
+            <p>Initial preparation</p>
+        </div>
+        <div class="image-with-caption">
+            <img src="./media/blended_first.png">
+            <p>Poisson bleding result</p>
+        </div>
+    </div>
+
+    <p>background and source images:</p>
+    <div class="image-row">
+        <img src="./media/samples/im3.JPG">
+        <img src="./media/samples/penguin.jpg">
+    </div>
+    <div class="image-row">
+        <div class="image-with-caption">
+            <img src="./media/prep_second.png">
+            <p>Initial preparation</p>
+        </div>
+        <div class="image-with-caption">
+            <img src="./media/blended_second.png">
+            <p>Poisson bleding result</p>
+        </div>
+    </div>
+    <p>background and source images:</p>
+    <div class="image-row">
+        <img src="./media/samples/snow_man.png">
+        <img src="./media/samples/sponge_bob.jpeg">
+    </div>
+    <div class="image-row">
+        <div class="image-with-caption">
+            <img src="./media/prep_third.png">
+            <p>Initial preparation</p>
+        </div>
+        <div class="image-with-caption">
+            <img src="./media/blended_third.png">
+            <p>Poisson bleding result</p>
+        </div>
+    </div>
+    <h2>Bells & Whistles</h2>
+    <p>We also tried adding mixed blending to get a better blending. It is similar to Poisson, but for b, we choose the gradient dependent on the larger one.
+        Formula below.
+        $$
+        \mathbf{v} = \underset{\mathbf{v}}{\mathrm{argmin}} \left( 
+        \sum_{i \in S, j \in N_i \cap S} \left( (v_i - v_j) - d_{ij} \right)^2 
+        + \sum_{i \in S, j \in N_i \cap \neg S} \left( (v_i - t_j) - d_{ij} \right)^2 
+        \right)
+        $$
+    </p>
+    <div class="image-row">
+        <img src="./media/mixed_blend_first.png">
+        <img src="./media/mixed_blend_second.png">
+        <img src="./media/mixed_blended_third.png">
+    </div>
+
+</body>
+
+</html>
