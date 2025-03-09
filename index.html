@@ -2,21 +2,203 @@
 <html>
 <head>
     <title>My Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --dark-purple: #1e1a2b;
+            --medium-purple: #352d4d;
+            --light-purple: #574f7d;
+            --accent-purple: #7b6c9e;
+            --beige: #f5f0e1;
+            --light-beige: #fffaf0;
+            --dark-beige: #e8e0cc;
+        }
+        
         body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
+            font-family: 'Fira Code', monospace;
+            margin: 0;
+            padding: 0;
+            background-color: var(--dark-purple);
+            color: var(--beige);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: var(--medium-purple);
+            color: var(--light-beige);
+            padding: 40px 0;
+            text-align: center;
+            border-bottom: 3px solid var(--accent-purple);
+        }
+        
+        h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+        
+        .subtitle {
+            margin-top: 10px;
+            font-size: 1.2rem;
+            color: var(--dark-beige);
+            font-weight: 300;
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .project-card {
+            background-color: var(--medium-purple);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 3px solid var(--accent-purple);
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+        }
+        
+        .card-header {
+            background-color: var(--light-purple);
+            color: var(--light-beige);
+            padding: 15px;
+            text-align: center;
+            font-size: 1.3rem;
+            font-weight: 600;
+            border-bottom: 2px solid var(--accent-purple);
+        }
+        
+        .card-body {
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-purple);
+            color: var(--light-beige);
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .btn:hover {
+            background-color: var(--light-purple);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+        
+        footer {
+            margin-top: 60px;
+            text-align: center;
+            padding: 20px;
+            background-color: var(--medium-purple);
+            color: var(--dark-beige);
+            border-top: 2px solid var(--accent-purple);
+        }
+        
+        /* Code-style decorations */
+        .code-comment {
+            color: #6c757d;
+            font-style: italic;
+            margin: 30px 0 15px 0;
+            text-align: left;
+            border-left: 3px solid var(--accent-purple);
+            padding-left: 15px;
+        }
+        
+        .code-bracket {
+            color: var(--accent-purple);
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
-    <h1>Welcome to My CS180 Portfolio!</h1>
-    <a href="./1/index.html">Project 1</a>
-    <a href="./2/index.html">Project 2</a>
-    <a href="./3/index.html">Project 3</a>
-    <a href="./4/index.html">Project 4</a>
-    <a href="./5/index.html">Project 5</a>
-    <a href="./6/index.html">Project 6(Pre-canned projects)</a>
-
+    <header>
+        <div class="container">
+            <h1><span class="code-bracket">{</span> CS180 Portfolio <span class="code-bracket">}</span></h1>
+            <div class="subtitle">// A showcase of my programming projects</div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="code-comment">/* Project collection - Each card represents a completed assignment */</div>
+        
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="card-header">Project 1</div>
+                <div class="card-body">
+                    <p>My first project for CS180</p>
+                    <a href="./1/index.html" class="btn">View Project</a>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <div class="card-header">Project 2</div>
+                <div class="card-body">
+                    <p>My second project for CS180</p>
+                    <a href="./2/index.html" class="btn">View Project</a>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <div class="card-header">Project 3</div>
+                <div class="card-body">
+                    <p>My third project for CS180</p>
+                    <a href="./3/index.html" class="btn">View Project</a>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <div class="card-header">Project 4</div>
+                <div class="card-body">
+                    <p>My fourth project for CS180</p>
+                    <a href="./4/index.html" class="btn">View Project</a>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <div class="card-header">Project 5</div>
+                <div class="card-body">
+                    <p>My fifth project for CS180</p>
+                    <a href="./5/index.html" class="btn">View Project</a>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <div class="card-header">Project 6</div>
+                <div class="card-body">
+                    <p>Pre-canned projects for CS180</p>
+                    <a href="./6/index.html" class="btn">View Project</a>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p><span class="code-bracket">return</span> CS180 Portfolio &copy; 2023;</p>
+        </footer>
+    </div>
 </body>
 </html>
